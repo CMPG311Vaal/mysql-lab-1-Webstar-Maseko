@@ -1,0 +1,99 @@
+Maseko SW 30089662
+
+Create database BidvestBank;
+show databases;
+use bidvestbank;
+
+
+		//CREATING TABLES
+create Table BankBranch(branch_name nvarchar(15) not null Primary Key, branch_city nvarchar(20), assets int);
+create Table customer(id int not null AUTO_INCREMENT Primary key, customer_street nvarchar(20), customer_city nvarchar(15));
+Alter table customer AUTO_INCREMENT=1001;
+create table CustomerAccount(account_number char(10) not null primary key, branch_name nvarchar(15), balance double);
+create table loan(loan_number nchar(10) not null primary key, branch_name nvarchar(15), amount double);
+create table depositor (customer_name nvarchar(20), account_number nchar(10) primary key not null);
+create Table borrower(customer_name nvarchar(20), loan_number nchar(10));
+create table employee(employee_id int not null AUTO_INCREMENT Primary key, employee_name nvarchar(20), branch_name nvarchar(15), salary double);
+alter table customer add column customer_name nvarchar(20);
+alter table employee AUTO_INCREMENT=101;
+SHOW TABLES;
+		
+		//Populating tabbles
+insert into customeraccount values('A-5324','Newton',500);
+insert into customeraccount values('A-5624','Sunnyside',400);
+insert into customeraccount values('A-7794', 'Midrand', 900);
+insert into customeraccount values('A-4467', 'Mabopane', 700);
+insert into customeraccount values('A-3453', 'Universitas', 750);
+insert into customeraccount values('A-2542', 'Mamelodi', 350);
+
+insert into bankbranch values('Midrand','Johannesburg', 7100000);
+insert into bankbranch values('Newton','Johannesburg', 9000000);
+insert into bankbranch values('Mabopane','Pretoria', 400000);
+insert into bankbranch values('Belgravia','Kimberly', 3700000);
+insert into bankbranch values('Sunnyside','Pretoria',1700000);
+insert into bankbranch values('Amanzimtoti','Durban',300000);
+insert into bankbranch values('Universitas','Bloemfontein', 2100000);
+insert into bankbranch values('Mamelodi','Pretoria', 8000000);
+
+insert into customer (customer_name, customer_street, customer_city) values ('Modise','Springs', 'George'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Brooks', 'Senator', 'Johannesburg');
+insert into customer (customer_name, customer_street, customer_city) values ('Jooste', 'North','Kimberly'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Lombard', 'Sand Hill', 'Nelspruit'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Mokwena', 'Walnut', 'Port-Elizabeth'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Johnson', 'Mmabatho', 'Mafikeng'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Johnson', 'Alma', 'Bloemfontein'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Zwane', 'Main', 'Mafikeng'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Lindsay', 'Park', 'George'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Smith', 'North', 'Kimberly'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Dlamini', 'Putnam', 'Port-Elizabeth'); 
+insert into customer (customer_name, customer_street, customer_city) values ('Wlliams', 'Nassau', 'Giyane'); 
+
+insert into depositor values('Johnson','A-5624');
+insert into depositor values('Johnson','A-7794');
+insert into depositor values('Zwane','A-3546');
+insert into depositor values('Lindsay','A-3453');
+insert into depositor values('Smith','A-4467');
+insert into depositor values('Dlamini','A-2542');
+
+
+insert into loan values('L-11', 'Mamelodi', 900);
+insert into loan values('L-14', 'Newton', 1500);
+insert into loan values('L-15', 'Sunnyside', 1500);
+insert into loan values('L-16', 'Sunnyside', 1300);
+insert into loan values('L-17', 'Newton', 1000);
+insert into loan values('L-23', 'Universitas', 2000);
+insert into loan values('L-93', 'Mamelodi', 500);
+
+insert into borrower values ('Modise','L-16');
+insert into borrower values ('Jooste','L-93');
+insert into borrower values ('Johnson','L-15');
+insert into borrower values ('Jackson','L-14');
+insert into borrower values ('Smith','L-11');
+insert into borrower values ('Zwane','L-17');
+insert into borrower values ('Smith','L-23');
+insert into borrower values ('Williams','L-17');
+
+insert into employee (employee_name, branch_name, salary) values ('Modise', 'Sunnyside', 1500);
+insert into employee (employee_name, branch_name, salary) values ('Brown', 'Sunnyside',1300);
+insert into employee (employee_name, branch_name, salary) values ('Gopal', 'Sunnyside',5300);
+insert into employee (employee_name, branch_name, salary) values ('Johnson', 'Newton',1500);
+insert into employee (employee_name, branch_name, salary) values ('Loreena', 'Newton',1300);
+insert into employee (employee_name, branch_name, salary) values ('Peterson', 'Newton', 2500);
+insert into employee (employee_name, branch_name, salary) values ('Rao', 'Austin', 1500);
+insert into employee (employee_name, branch_name, salary) values ('Sato', 'Austin', 1600);
+
+		//4. QUERIES
+select * from customeraccount where balance < 700;
+select customer_name from customer where customer_city = 'Johannesburg';
+select * from employee where salary > 1500 and branch_name <> 'Newton';
+select avg(salary) as avg_salary from employee;
+select MAX(assets) from bankbranch;
+
+		//5. QUERIES
+Select * from employee where branch_name = 'Sunnyside';
+Select * from borrower;
+Select account_number from customeraccount where balance > 900;
+Select account_number, balance from customeraccount where branch_name = 'Newton' and balance > 600;
+Select branch_name, assets from bankbranch;
+
+		
